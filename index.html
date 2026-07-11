@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXT FEST 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;600&amp;display=swap');
+        
+        :root {
+            --red: #e30613;
+        }
+        
+        .tail-container {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        .logo-font {
+            font-family: 'Anton', sans-serif;
+        }
+
+        .hero-bg {
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.88) 0%,
+                    rgba(0, 0, 0, 0.78) 20%,
+                    rgba(0, 0, 0, 0.65) 40%,
+                    rgba(0, 0, 0, 0.70) 60%,
+                    rgba(0, 0, 0, 0.85) 80%,
+                    rgba(0, 0, 0, 0.97) 92%,
+                    #000000 100%
+                ),
+                url(".\\img\\content\\heroBG.jpg");
+            
+            background-size: cover, 120% auto;
+            background-position: left center, 25% 20%;
+            background-repeat: no-repeat;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #e30613;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .section-header {
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 4px;
+        }
+
+        .red-x {
+            filter: drop-shadow(0 0 15px #e30613);
+        }
+
+        .band-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .band-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgb(227 6 19 / 0.4);
+        }
+
+        .stage {
+            background: linear-gradient(135deg, #111111, #1a1a1a);
+        }
+
+        /* Mobilní hero - černé pozadí */
+        @media (max-width: 768px) {
+            #home {
+                background-image: none !important;
+                background-color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body class="tail-container bg-black text-white overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav class="bg-black border-b border-red-900 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="#home" onclick="smoothScrollTo('home')" class="flex items-center gap-3">
+                    <img src=".\img\logo\logoSmall.png" alt="NEXT FEST" class="h-10 w-auto">
+                    <!-- Text NEXTFEST skrýt na mobilu -->
+                    <div class="hidden md:flex items-center">
+                        <span class="logo-font text-[2.35rem] tracking-[-1.5px] leading-none text-white">NEXT</span>
+                        <span class="logo-font text-[2.35rem] tracking-[-1.5px] leading-none text-red-600">FEST</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest">
+                <a href="#home" onclick="smoothScrollTo('home')" class="nav-link cursor-pointer">HOME</a>
+                <a href="#o-festivalu" onclick="smoothScrollTo('o-festivalu')" class="nav-link cursor-pointer">O FESTIVALU</a>
+                <a href="#lineup" onclick="smoothScrollTo('lineup')" class="nav-link cursor-pointer">LINE-UP</a>
+                <a href="#vstupenky" onclick="smoothScrollTo('vstupenky')" class="nav-link cursor-pointer">VSTUPENKY</a>
+                <a href="#galerie" onclick="smoothScrollTo('galerie')" class="nav-link cursor-pointer">GALERIE</a>
+                <a href="#lokace" onclick="smoothScrollTo('lokace')" class="nav-link cursor-pointer">KDE NÁS NAJDEŠ</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="https://www.smsticket.cz/vstupenky/71600"
+                target="_blank"
+                class="bg-red-600 hover:bg-red-700 transition-colors px-6 py-2.5 text-sm font-bold uppercase tracking-widest rounded-none border-2 border-red-600 hover:border-white">
+                    Koupit lístky
+                </a>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-red-900">
+            <div class="flex flex-col py-6 px-6 space-y-6 text-lg">
+                <a href="#home" onclick="toggleMobileMenu();smoothScrollTo('home')" class="hover:text-red-500">HOME</a>
+                <a href="#o-festivalu" onclick="toggleMobileMenu();smoothScrollTo('o-festivalu')" class="hover:text-red-500">O FESTIVALU</a>
+                <a href="#lineup" onclick="toggleMobileMenu();smoothScrollTo('lineup')" class="hover:text-red-500">LINE-UP</a>
+                <a href="#vstupenky" onclick="toggleMobileMenu();smoothScrollTo('vstupenky')" class="hover:text-red-500">VSTUPENKY</a>
+                <a href="#galerie" onclick="toggleMobileMenu();smoothScrollTo('galerie')" class="hover:text-red-500">GALERIE</a>
+                <a href="#lokace" onclick="toggleMobileMenu();smoothScrollTo('lokace')" class="hover:text-red-500">KDE NÁS NAJDEŠ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-24 md:pt-20">
+        <div class="max-w-5xl mx-auto px-6 text-center pt-8 md:pt-8">
+            
+            <!-- Obsah posunutý na mobilu -->
+            <div class="md:-mt-8 mb-12 md:mb-16">
+                <div class="flex justify-center -mt-6 md:-mt-10 mb-8 md:mb-12">
+                    <img src=".\img\logo\logo.png"
+                        alt="NEXT FEST Logo"
+                        class="h-40 sm:h-44 md:h-[21rem] w-auto max-w-[85vw] md:max-w-[580px]">
+                </div>
+                
+                <p class="text-2xl md:text-3xl mb-3 md:mb-4 text-red-400">29. 8. 2026 • DASKABÁT</p>
+                <p class="text-xl max-w-2xl mx-auto mb-10 text-gray-300">
+                    Multižánrový festival spojující metal, rock & hip-hop v surové energii Jack's CowHouse
+                </p>
+            
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center -mt-2">
+                    <div class="hidden sm:flex items-center text-red-500 animate-bounce">
+                        <i class="fas fa-chevron-down text-4xl"></i>
+                    </div>
+                    <a href="https://www.smsticket.cz/vstupenky/71600"
+                    target="_blank"
+                    onclick="smoothScrollTo('vstupenky')"
+                    class="inline-block bg-red-600 hover:bg-white hover:text-red-600 border-2 border-red-600 text-white font-bold text-lg px-12 py-6 transition-all duration-300">
+                        VSTUPENKY OD 200 KČ
+                    </a>
+                    <a href="#lineup" onclick="smoothScrollTo('lineup')"
+                    class="inline-block border-2 border-white hover:bg-white hover:text-black font-bold text-lg px-12 py-6 transition-all duration-300">
+                        ZOBRAZIT LINE-UP
+                    </a>
+                    <div class="hidden sm:flex items-center text-red-500 animate-bounce">
+                        <i class="fas fa-chevron-down text-4xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistiky -->
+            <div class="mt-16 flex justify-center gap-8 text-sm">
+                <div class="text-center">
+                    <div class="text-red-500 text-4xl font-bold">2</div>
+                    <div class="uppercase tracking-widest text-xs">Stage</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-red-500 text-4xl font-bold">15+</div>
+                    <div class="uppercase tracking-widest text-xs">Kapel & DJs</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-red-500 text-4xl font-bold">1</div>
+                    <div class="uppercase tracking-widest text-xs">Nezapomenutelný den</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="o-festivalu" class="py-24 bg-zinc-950">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16 items-start">
+                <div class="md:col-span-7 pt-1">   
+                    <div class="inline-flex items-center gap-2 bg-red-950 text-red-400 px-6 py-2 text-sm tracking-widest mb-6">
+                        <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                        JIŽ DRUHÝ ROČNÍK
+                    </div>
+                    <h2 class="section-header text-6xl md:text-7xl leading-none mb-8">O FESTIVALU</h2>
+                    <div class="prose prose-invert max-w-none text-lg leading-relaxed">
+                        <p class="mb-6">
+                            NextFest 2026 navazuje na úspěšný první ročník a 29. srpna tak areál CowHouse v Daskabátu opět ožije osobitou atmosféřou tohoto multižánrového festivalu.
+                        </p>
+                        <p>
+                            Navazuje na tradici nezávislého festivalu <strong>FreeFest</strong> (2015–2024). 
+                            Zachováváme raw energii a podporu lokální undergroundové scény.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-12 grid grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="uppercase text-red-400 text-sm mb-3">Rock / Metal Stage</h4>
+                            <p class="text-zinc-400">Kapely napříč rockem a metalem</p>
+                        </div>
+                        <div>
+                            <h4 class="uppercase text-red-400 text-sm mb-3">Hip-Hop / DJ Stage</h4>
+                            <p class="text-zinc-400">Rappeři a DJs z mladé scény</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-5">
+                    <img src=".\img\content\uvod.png" 
+                         alt="Next Fest atmosféra" 
+                         class="w-full rounded-lg shadow-2xl shadow-red-950 border border-red-900">
+                    <div class="text-xs text-center mt-4 text-zinc-500">
+                        Jack's CowHouse • Daskabát
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINE-UP -->
+    <section id="lineup" class="py-24 bg-black relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-header text-6xl md:text-7xl mb-4">LINE-UP 2026</h2>
+                <p class="text-red-400 uppercase tracking-[3px]">Postupně odhalujeme</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Band 1 -->
+                <div onclick="showBandModal(0)" class="band-card bg-zinc-900 border border-red-900 hover:border-red-500 p-6 cursor-pointer group">
+                    <div class="h-2 w-12 bg-red-600 mb-6 group-hover:w-16 transition-all"></div>
+                    <h3 class="text-2xl font-bold mb-1">SEVERED1</h3>
+                    <p class="text-red-400 text-sm">Hardcore Metal • CZ</p>
+                </div>
+                
+                <!-- Band 2 -->
+                <div onclick="showBandModal(1)" class="band-card bg-zinc-900 border border-red-900 hover:border-red-500 p-6 cursor-pointer group">
+                    <div class="h-2 w-12 bg-red-600 mb-6 group-hover:w-16 transition-all"></div>
+                    <h3 class="text-2xl font-bold mb-1">DOKY</h3>
+                    <p class="text-red-400 text-sm">Rap / Hip-Hop • CZ</p>
+                </div>
+                
+                <!-- Band 3 -->
+                <div onclick="showBandModal(2)" class="band-card bg-zinc-900 border border-red-900 hover:border-red-500 p-6 cursor-pointer group">
+                    <div class="h-2 w-12 bg-red-600 mb-6 group-hover:w-16 transition-all"></div>
+                    <h3 class="text-2xl font-bold mb-1">EUFORBOY</h3>
+                    <p class="text-red-400 text-sm">Rap / trap • CZ</p>
+                </div>
+
+                <!-- Band 4 -->
+                <div onclick="showBandModal(3)" class="band-card bg-zinc-900 border border-red-900 hover:border-red-500 p-6 cursor-pointer group">
+                    <div class="h-2 w-12 bg-red-600 mb-6 group-hover:w-16 transition-all"></div>
+                    <h3 class="text-2xl font-bold mb-1">MEINKRAFT</h3>
+                    <p class="text-red-400 text-sm">Grind-Dance • SK</p>
+                </div>
+            </div>
+
+            <!-- COMING SOON -->
+            <div class="mt-16 text-center">
+                <div class="inline-flex items-center gap-3 bg-zinc-900 border border-red-900/50 px-8 py-4 rounded">
+                    <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <p class="uppercase tracking-[4px] text-red-400 text-sm font-medium">
+                        Další kapely brzy...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKETS -->
+    <section id="vstupenky" class="py-24 bg-zinc-950">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="section-header text-6xl mb-8">VSTUPENKY</h2>
+            
+            <div class="bg-black border-2 border-red-600 p-16 rounded-none max-w-lg mx-auto">
+                <div class="mb-8">
+                    <div class="text-5xl font-bold text-red-500">200 KČ</div>
+                    <div class="uppercase text-sm tracking-widest mt-2">Předprodej</div>
+                </div>
+                
+                <a href="https://www.smsticket.cz/vstupenky/71600" 
+                   target="_blank"
+                   class="block bg-red-600 hover:bg-red-700 w-full py-8 text-2xl font-bold tracking-widest transition-colors">
+                    Koupit přes SMS Ticket
+                </a>
+                
+                <div class="mt-10 text-xs text-zinc-400 space-y-2">
+                    <p>• Early bird cena do vyprodání</p>
+                    <p>• Děti do 12 let zdarma (s doprovodem)</p>
+                    <p>• Vstupenka platí na celý festival</p>
+                    <p>• V ceně parking a místo pro stan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="galerie" class="py-24 bg-black">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-header text-6xl text-center mb-16">FOTOGALERIE</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <img src=".\img\gallery\img1.jpg" 
+                     alt="Festival" 
+                     class="w-full h-80 object-cover hover:scale-105 transition-transform cursor-pointer"
+                     onclick="showImageModal(this.src)">
+                <img src=".\img\gallery\img2.jpg"
+                     alt="Festival" 
+                     class="w-full h-80 object-cover hover:scale-105 transition-transform cursor-pointer"
+                     onclick="showImageModal(this.src)">
+                <img src=".\img\gallery\img3.jpg"
+                     alt="Festival" 
+                     class="w-full h-80 object-cover hover:scale-105 transition-transform cursor-pointer"
+                     onclick="showImageModal(this.src)">
+                <img src=".\img\gallery\img4.jpg"
+                     alt="Festival" 
+                     class="w-full h-80 object-cover hover:scale-105 transition-transform cursor-pointer"
+                     onclick="showImageModal(this.src)">
+                <img src=".\img\gallery\img5.jpg"
+                     alt="Festival" 
+                     class="w-full h-80 object-cover hover:scale-105 transition-transform cursor-pointer"
+                     onclick="showImageModal(this.src)">
+                <img src=".\img\gallery\img6.jpg" 
+                     alt="Festival" 
+                     class="w-full h-80 object-cover hover:scale-105 transition-transform cursor-pointer"
+                     onclick="showImageModal(this.src)">
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="lokace" class="py-24 bg-zinc-950">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="section-header text-6xl mb-10">KDE NÁS NAJDEŠ?</h2>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <i class="fas fa-map-marker-alt text-red-500 text-3xl"></i>
+                                <div>
+                                    <div class="font-bold">Jack's CowHouse</div>
+                                    <div class="text-zinc-400">Daskabát 190, 779 00 Daskabát</div>   <!-- ← nová přesná adresa -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pl-12">
+                            <p class="text-zinc-400 mb-6">
+                                Areál bývalého kravína přeměněný na kulturní a hudební centrum. 
+                                Skvělá atmosféra, velký venkovní prostor a dvě stage.
+                            </p>
+                            
+                            <div class="border-l-2 border-red-900 pl-6">
+                                <h4 class="uppercase text-sm mb-3">Jak se dostat?</h4>
+                                <ul class="space-y-3 text-sm">
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-red-500 font-mono">A</span> 
+                                        <span>Autem: 15 minut z Olomouce po silnici I/46</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-red-500 font-mono">B</span> 
+                                        <span>Autobus: Z olomoucké zastávky “Autobusové nádraží” linka č. 345 každých cca 90 minut na zastávku “Daskabát, dol.zast.”. Pak necelých 5 min pěšky.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SKUTEČNÁ INTERAKTIVNÍ MAPA -->
+                <div class="bg-zinc-900 p-6 border border-zinc-800">
+                    <div class="aspect-video bg-zinc-800 overflow-hidden rounded">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2563.8!2d17.5678!3d49.623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDM3JzIzLjAiTiAxN8KwMzQnMDQuMCJF!5e0!3m2!1scs!2scz!4v1720000000000"
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="mt-4 text-xs text-center text-zinc-500">
+                        Jack's CowHouse • Daskabát 190, 779 00 Daskabát
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-red-900 py-8">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-6">
+            <!-- Levý sloupec -->
+            <div>
+                <a href="#home" onclick="smoothScrollTo('home')" class="flex items-center gap-3 inline-block mb-4">
+                    <img src=".\img\logo\logoSmall.png" alt="Logo" class="h-10 w-auto">
+                    <div class="flex items-center">
+                        <span class="logo-font text-[2.85rem] tracking-[-2.5px] leading-none text-white">NEXT</span>
+                        <span class="logo-font text-[2.85rem] tracking-[-2.5px] leading-none text-red-600">FEST</span>
+                    </div>
+                </a>
+                <p class="text-zinc-400 text-sm">© 2026 Next Fest • Všechna práva vyhrazena</p>
+            </div>
+            
+            <div class="text-sm flex flex-col justify-end">
+                <div class="uppercase mb-3 border-b border-red-900 pb-0 inline-block w-fit">
+                    Kontakt
+                </div>
+                <p class="mb-8">Email: <span class="text-red-400">info@nextfest.cz</span></p>
+            </div>
+            
+            <!-- Pravý sloupec -->
+            <div class="flex flex-col md:items-end text-sm">
+                <div class="flex gap-6">
+                    <a href="https://www.instagram.com/nextfest_official/" 
+                    target="_blank" 
+                    class="hover:text-red-500">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61565203227636" 
+                    target="_blank" 
+                    class="hover:text-red-500">
+                        <i class="fab fa-facebook text-2xl"></i>
+                    </a>
+                </div>
+                <div class="mt-auto pt-4 text-xs text-zinc-500">
+                    Made with ❤️ for the underground scene
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BAND MODAL -->
+    <div id="band-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center">
+        <div class="max-w-lg w-full mx-4 bg-zinc-900 border border-red-600 p-8">
+            <div class="flex justify-between items-start mb-6">
+                <div id="modal-band-name" class="text-4xl font-bold"></div>
+                <button onclick="closeBandModal()" class="text-3xl text-zinc-400 hover:text-white">×</button>
+            </div>
+            <div id="modal-band-desc" class="text-zinc-300 leading-relaxed mb-8"></div>
+            <button onclick="closeBandModal()" 
+                    class="w-full py-4 bg-transparent border border-red-600 hover:bg-red-600 transition-colors">
+                ZAVŘÍT
+            </button>
+        </div>
+    </div>
+
+    <!-- IMAGE MODAL -->
+    <div id="image-modal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
+        <div class="relative max-w-5xl w-full mx-4">
+            <button onclick="closeImageModal()" 
+                    class="absolute -top-12 right-0 text-white text-4xl hover:text-red-500">×</button>
+            <img id="modal-image" src="" class="w-full max-h-[85vh] object-contain">
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script already included
+        
+        function smoothScrollTo(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // Band data
+        const bands = [
+            {
+                name: "SEVERED1",
+                desc: "Plážovej metal těžší než tvoje máma. Nahoď havajskou košili, obuj žabky, zapal cígo a pojď si urvat hlavu do moshe, protože tahle bublinová párty bude HODNĚ!",
+                image: ".\\img\\bands\\severed1.jpg",
+                stage: "Rock / Metal Stage"
+            },
+            {
+                name: "DOKY",
+                desc: "Jeden z dlouhodobě nejaktivnějších zástupců olomouckého rapu, jehož léta pilovaná show rozhodně stojí za zhlédnutí. Dokyho tvorba vyniká velmi osobní zpovědní rovinou a stejně tak hravými slovními obraty, dvojsmysly a metaforami plynoucími v proměnlivé a zároveň striktní flow.",
+                image: ".\\img\\bands\\doky.jpg",
+                stage: "HIP HOP / DJ STAGE"
+            },
+            {
+                name: "EUFORBOY",
+                desc: "Rapper z Olomouce, který začínal v uskupení Dope Boys. Ti byli jako jedni z prvních průkopníků trapu na Olomoucku. Po rozpadu Dope Boys v roce 2014 se svým parťákem Medicalem (Skáci) založil crew s názvem EAGLE SQUAD ve které působí dodnes. Má za sebou ep, mixtape a několik alb.",
+                image: ".\\img\\bands\\euforboy.jpg",
+                stage: "HIP HOP / DJ STAGE"
+            },
+            {
+                name: "MEINKRAFT",
+                desc: "\"Tak tohle jste ještě neviděli!\", takto by se kapela MeinKraft ze Zlína chtěla prezentovat. Kombinace memů a extrémních žánrů jako grindcore, hardcore nebo slam spolu s jejich typickou image inspirovanou hrou Minecraft, jsou něco naprosto jedinečného!",
+                image: ".\\img\\bands\\meinkraft.jpg",
+                stage: "Rock / Metal Stage"
+            }
+        ];
+        
+        function showBandModal(index) {
+            const modal = document.getElementById('band-modal');
+            const band = bands[index];
+            
+            document.getElementById('modal-band-name').textContent = band.name;
+            
+            document.getElementById('modal-band-desc').innerHTML = `
+                <img src="${band.image}"
+                    alt="${band.name}"
+                    class="w-full h-64 object-cover rounded-lg mb-6 shadow-xl">
+                
+                <p class="text-zinc-300 leading-relaxed">${band.desc}</p>
+                
+                <div class="mt-8 pt-8 border-t border-zinc-700 text-xs uppercase tracking-widest text-red-400">
+                    Sobota 29. 8. 2026 • ${band.stage}
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function closeBandModal() {
+            const modal = document.getElementById('band-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+        
+        function showImageModal(src) {
+            const modal = document.getElementById('image-modal');
+            document.getElementById('modal-image').src = src;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+        
+        // Close modals with ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const bandModal = document.getElementById('band-modal');
+                const imageModal = document.getElementById('image-modal');
+                if (!bandModal.classList.contains('hidden')) closeBandModal();
+                else if (!imageModal.classList.contains('hidden')) closeImageModal();
+            }
+        });
+        
+        // Initialize
+        window.onload = function() {
+            console.log('%cNEXT FEST 2026 web ready 🔥', 'color: #e30613; font-family: monospace');
+        };
+    </script>
+</body>
+</html>
